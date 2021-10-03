@@ -142,6 +142,7 @@ def isFailed(posBox):
     return False
 
 """Implement all approcahes"""
+# Define time limit for the running
 TIME_LIMIT = 10
 
 def depthFirstSearch(gameState):
@@ -178,34 +179,57 @@ def depthFirstSearch(gameState):
 
 def breadthFirstSearch(gameState):
     """Implement breadthFirstSearch approach"""
+    # Get positions of all box
     beginBox = PosOfBoxes(gameState)
+    # Get position of player
     beginPlayer = PosOfPlayer(gameState)
-
-    startState = (beginPlayer, beginBox) # e.g. ((2, 2), ((2, 3), (3, 4), (4, 4), (6, 1), (6, 4), (6, 5)))
-    frontier = collections.deque([[startState]]) # store states
-    actions = collections.deque([[0]]) # store actions
+    
+    # Define start state. e.g. ( (2, 2),  ((2, 3), (3, 4), (4, 4), (6, 1), (6, 4), (6, 5)) )
+    startState = (beginPlayer, beginBox) 
+    # Define a deque to store all states
+    frontier = collections.deque([[startState]]) 
+    # Define a deque to store actions
+    actions = collections.deque([[0]]) 
+    # Define a set to store all explored node
     exploredSet = set()
+    # Define temp to store the answer actions
     temp = []
     ### Implement breadthFirstSearch here
     start_time = time.time()
+    # Stop when no more state exists in frontire deque
     while frontier:
+        # Stop when agent take too much time
         running_time = time.time() - start_time
         if running_time > TIME_LIMIT:
             print("Time Limit Exceeded!")
             return None
+
+        # Get node AT THE LEFT OF THE frontier
+        # This means that the agent will traverse all the nodes on each level
         node = frontier.popleft()
+        # The same thing with action
         node_action = actions.popleft()
+
+        # If agent reach target, save the solution and stop searching
         if isEndState(node[-1][-1]):
             temp += node_action[1:]
             break
+        # Consider node only if it doesn't exists in exploredSet
         if node[-1] not in exploredSet:
+            # Add this node to the explored
             exploredSet.add(node[-1])
+            # Consider all valid actions
             for action in legalActions(node[-1][0], node[-1][1]):
+                # Update new state
                 newPosPlayer, newPosBox = updateState(node[-1][0], node[-1][1], action)
+                # if the state is potentially failed, then prune the search
                 if isFailed(newPosBox):
                     continue
+                # Add this state into the frontier
                 frontier.append(node + [(newPosPlayer, newPosBox)])
+                # Ass this action into the actions
                 actions.append(node_action + [action[-1]])
+    # When while loop is done, return the answer
     return temp
     
 def cost(actions):
@@ -214,36 +238,60 @@ def cost(actions):
 
 def uniformCostSearch(gameState):
     """Implement uniformCostSearch approach"""
+    # Get positions of all box
     beginBox = PosOfBoxes(gameState)
+    # Get position of player
     beginPlayer = PosOfPlayer(gameState)
 
+    # Define start state. e.g. ( (2, 2),  ((2, 3), (3, 4), (4, 4), (6, 1), (6, 4), (6, 5)) )
     startState = (beginPlayer, beginBox)
+    # Define frontier using PriorityQueue to condiser priority of each state
+    # The node has the lowest cost will has the highest priority
     frontier = PriorityQueue()
     frontier.push([startState], 0)
-    exploredSet = set()
+    # The same thing with actions
     actions = PriorityQueue()
     actions.push([0], 0)
+    # Define a set to store all explored node
+    exploredSet = set()
+    # Define temp to store the answer actions
     temp = []
-    ### Implement uniform cost search here
+    ### Implement UCS here
     start_time = time.time()
+    # Stop when no more state exists in frontire deque
     while frontier:
+        # Stop when agent take too much time
         running_time = time.time() - start_time
         if running_time > TIME_LIMIT:
+            print("Time Limit Exceeded!")
             return None
+        
+        # Take the highest priority node into condiser
         node = frontier.pop()
         node_action = actions.pop()
+        # If agent reach target, save the solution and stop searching
         if isEndState(node[-1][-1]):
             temp += node_action[1:]
             break
+
+        # Consider node only if it doesn't exists in exploredSet
         if node[-1] not in exploredSet:
+            # Add this node to the explored
             exploredSet.add(node[-1])
+            # Calculate cost
             Cost = cost(node_action[1:])
+            # Consider all valid actions
             for action in legalActions(node[-1][0], node[-1][1]):
+                # Update new state
                 newPosPlayer, newPosBox = updateState(node[-1][0], node[-1][1], action)
+                # if the state is potentially failed, then prune the search
                 if isFailed(newPosBox):
                     continue
+                # Add this state into the frontier along with the cost.
+                # Thanks to this, UCS can consider cost when searching.
                 frontier.push(node + [(newPosPlayer, newPosBox)], Cost)
                 actions.push(node_action + [action[-1]], Cost)
+    # When while loop is done, return the answer
     return temp
 
 """Read command"""

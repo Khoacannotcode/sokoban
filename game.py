@@ -127,6 +127,7 @@ class Game:
         return nb_missing_target == 0
 
     def auto_move(self):
+        print("Level: ", self.index_level)
         # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'dfs')
         # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'bfs')
         # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'ucs')

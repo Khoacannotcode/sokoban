@@ -63,13 +63,13 @@ class PlayerInterface:
         window.blit(self.txtResetSurface, self.posTxtReset)
 
         self.txtAutoSurface = self.font_menu.render(self.txtAuto, True, self.colorTxtAuto, SOKOBAN.WHITE)
-        self.posTxtAuto = ((SOKOBAN.WINDOW_WIDTH - self.txtAutoSurface.get_width()) - 10, 30)
+        self.posTxtAuto = ((SOKOBAN.WINDOW_WIDTH - self.txtAutoSurface.get_width()) - 10, 40)
         window.blit(self.txtAutoSurface, self.posTxtAuto)
 
         self.txtPREV = self.font_menu.render("PREV", True, self.colorTxtAuto, SOKOBAN.WHITE)
-        self.posTxtPREV = ((SOKOBAN.WINDOW_WIDTH - self.txtPREV.get_width()) - 10, 60)
+        self.posTxtPREV = ((SOKOBAN.WINDOW_WIDTH - self.txtPREV.get_width()) - 10, 70)
         window.blit(self.txtPREV, self.posTxtPREV)
 
         self.txtNEXT = self.font_menu.render("NEXT", True, self.colorTxtAuto, SOKOBAN.WHITE)
-        self.posTxtNEXT = ((SOKOBAN.WINDOW_WIDTH - self.txtNEXT.get_width()) - 10, 90)
+        self.posTxtNEXT = ((SOKOBAN.WINDOW_WIDTH - self.txtNEXT.get_width()) - 10, 100)
         window.blit(self.txtNEXT, self.posTxtNEXT)
