@@ -3,7 +3,9 @@
 ### UIT-CS106-AI
 
 **Assignment 1**
+
 **Nguyen Van Khoa**
+
 **18520929**
 
 Sokoban game in Python for Artificial Intelligence class.
@@ -16,7 +18,7 @@ Language: Python 3.7.7
 
 -  Clone the repository
 ```
-git clone <link>
+git clone https://github.com/Khoacannotcode/sokoban.git
 ```
 - Install requirement packets
 ```
