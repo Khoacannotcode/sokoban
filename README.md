@@ -9,7 +9,9 @@
 **18520929**
 
 Sokoban game in Python for Artificial Intelligence class.
+
 Specs OS: Windows 10
+
 Language: Python 3.7.7
 
 
@@ -37,7 +39,7 @@ In this project, I've implemented some main algorithms for solving sokoban probl
 ## Run the game
 
 ```
-python Sokoban.py --algo algo_to_use
+python Sokoban.py --algo <algo_to_use>
 ```
 While `algo_to_use` include `dfs, bfs` and `ucs` .
 
