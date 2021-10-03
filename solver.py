@@ -229,7 +229,6 @@ def uniformCostSearch(gameState):
     while frontier:
         running_time = time.time() - start_time
         if running_time > TIME_LIMIT:
-            print("Time Limit Exceeded!")
             return []
         node = frontier.pop()
         node_action = actions.pop()
@@ -265,8 +264,8 @@ def readCommand(argv):
     return args
 
 def get_move(layout, player_pos, method):
-    print("Activated auto play!")
-    print("Running...")
+    print("Auto-play is running.")
+    print("Algorithm using: ", method)
     time_start = time.time()
     global posWalls, posGoals
     # layout, method = readCommand(sys.argv[1:]).values()
@@ -283,7 +282,10 @@ def get_move(layout, player_pos, method):
         raise ValueError('Invalid method.')
     time_end=time.time()
     if result:
-        print('Runtime of %s: %.2f second.' %(method, time_end-time_start))
+        print('✔ Runtime of %s: %.2f second.' %(method, time_end-time_start))
         print('Num step: ', len(result))
+    else:
+        print("❌Time Limit Exceeded!")
+
     print("================================")
     return result

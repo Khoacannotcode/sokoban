@@ -2,6 +2,20 @@ import pygame
 from pygame.locals import *
 import constants as SOKOBAN
 from game import *
+import argparse
+
+parser = argparse.ArgumentParser(description='Sokoban Solver')
+parser.add_argument('--algo', 
+                    type=str, 
+                    help="""
+                    Choose the algorithm to use:
+                    - dfs
+                    - bfs
+                    - ucs
+                    """
+)
+args = parser.parse_args()
+
 
 class Menu:
     def __init__(self):
@@ -17,11 +31,11 @@ class Menu:
 
         if x > self.new_game_txt_position[0] and x < self.new_game_txt_position[0] + self.new_game_txt_surface.get_width() \
         and y > 300 and y < 300 + self.new_game_txt_surface.get_height():
-            sokoban = Game(window)
+            sokoban = Game(window, args.algo)
             sokoban.start()
         elif x > self.load_game_txt_position[0] and x < self.load_game_txt_position[0] + self.load_game_txt_surface.get_width() \
         and y > 370 and y < 370 + self.load_game_txt_surface.get_height():
-            sokoban = Game(window)
+            sokoban = Game(window, args.algo)
             sokoban.scores.load()
         elif x > self.quit_game_txt_position[0] and x < self.quit_game_txt_position[0] + self.quit_game_txt_surface.get_width() \
         and y > 440 and y < 440 + self.quit_game_txt_surface.get_height():
@@ -59,10 +73,10 @@ def main():
             run = False
         if event.type == KEYDOWN:
             if event.key == K_j:
-                sokoban = Game(window)
+                sokoban = Game(window, args.algo)
                 sokoban.start()
             elif event.key == K_c:
-                sokoban = Game(window)
+                sokoban = Game(window, args.algo)
                 sokoban.scores.load()
             elif event.key == K_ESCAPE:
                 run = False

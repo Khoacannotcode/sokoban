@@ -26,7 +26,7 @@ def move( threadName, delay, strategy):
             press('up')
         # time.sleep(0.2)
 class Game:
-    def __init__(self, window):
+    def __init__(self, window, algo):
         self.window = window
         self.load_textures()
         self.player = None
@@ -35,6 +35,7 @@ class Game:
         self.play = True
         self.scores = Scores(self)
         self.player_interface = PlayerInterface(self.player, self.level)
+        self.algo = algo
 
     def load_textures(self):
         self.textures = {
@@ -114,7 +115,8 @@ class Game:
     def auto_move(self):
         # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'dfs')
         # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'bfs')
-        strategy = get_move(self.level.structure[:-1], self.level.position_player, 'ucs')
+        # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'ucs')
+        strategy = get_move(self.level.structure[:-1], self.level.position_player, self.algo)
         # with open("assets/sokobanSolver/Solverlevel_" + str(self.index_level) + ".txt", 'w+') as solver_file:
         #     for listitem in strategy:
         #         solver_file.write('%s, ' % listitem)
