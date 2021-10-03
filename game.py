@@ -30,7 +30,7 @@ class Game:
         self.window = window
         self.load_textures()
         self.player = None
-        self.index_level = 2
+        self.index_level = 1
         self.load_level()
         self.play = True
         self.scores = Scores(self)
@@ -46,14 +46,28 @@ class Game:
             SOKOBAN.PLAYER: pygame.image.load('assets/images/player_sprites.png').convert_alpha()
         }    
 
-    def load_level(self):
-        self.level = Level(self.index_level)
+    def load_level(self, prev=False, next=False):
+        if next:
+            self.index_level += 1
+            if (self.index_level == 17):
+                self.index_level = 1
+            self.scores.save()
+            self.load_level()
+        elif prev:
+            self.index_level -= 1
+            if (self.index_level == 0):
+                self.index_level = 16
+            self.scores.save()
+            self.load_level()
+        else:
+            self.level = Level(self.index_level)
         self.board = pygame.Surface((self.level.width, self.level.height))
         if self.player:
             self.player.pos = self.level.position_player
             self.player_interface.level = self.level
         else:
             self.player = Player(self.level)
+            # self.player = Player(Level(self.index_level + 1))
 
     def start(self):
         while self.play:

@@ -160,7 +160,7 @@ def depthFirstSearch(gameState):
         running_time = time.time() - start_time
         if running_time > TIME_LIMIT:
             print("Time Limit Exceeded!")
-            return []
+            return None
         node = frontier.pop()
         node_action = actions.pop()
         if isEndState(node[-1][-1]):
@@ -192,7 +192,7 @@ def breadthFirstSearch(gameState):
         running_time = time.time() - start_time
         if running_time > TIME_LIMIT:
             print("Time Limit Exceeded!")
-            return []
+            return None
         node = frontier.popleft()
         node_action = actions.popleft()
         if isEndState(node[-1][-1]):
@@ -229,7 +229,7 @@ def uniformCostSearch(gameState):
     while frontier:
         running_time = time.time() - start_time
         if running_time > TIME_LIMIT:
-            return []
+            return None
         node = frontier.pop()
         node_action = actions.pop()
         if isEndState(node[-1][-1]):
@@ -264,8 +264,7 @@ def readCommand(argv):
     return args
 
 def get_move(layout, player_pos, method):
-    print("Auto-play is running.")
-    print("Algorithm using: ", method)
+    print("Auto-play: running ", method)
     time_start = time.time()
     global posWalls, posGoals
     # layout, method = readCommand(sys.argv[1:]).values()

@@ -35,6 +35,16 @@ class PlayerInterface:
         if x > self.posTxtAuto[0] and x < self.posTxtAuto[0] + self.txtAutoSurface.get_width() \
         and y > self.posTxtAuto[1] and y < self.posTxtAuto[1] + self.txtAutoSurface.get_height():
             game.auto_move()
+
+        # PREV level
+        if x > self.posTxtPREV[0] and x < self.posTxtPREV[0] + self.txtPREV.get_width() \
+        and y > self.posTxtPREV[1] and y < self.posTxtPREV[1] + self.txtPREV.get_height():
+            game.load_level(prev=True)
+
+        # NEXT level
+        if x > self.posTxtNEXT[0] and x < self.posTxtNEXT[0] + self.txtNEXT.get_width() \
+        and y > self.posTxtNEXT[1] and y < self.posTxtNEXT[1] + self.txtNEXT.get_height():
+            game.load_level(next=True)
                 
     def setTxtColors(self):
         pass
@@ -55,3 +65,11 @@ class PlayerInterface:
         self.txtAutoSurface = self.font_menu.render(self.txtAuto, True, self.colorTxtAuto, SOKOBAN.WHITE)
         self.posTxtAuto = ((SOKOBAN.WINDOW_WIDTH - self.txtAutoSurface.get_width()) - 10, 30)
         window.blit(self.txtAutoSurface, self.posTxtAuto)
+
+        self.txtPREV = self.font_menu.render("PREV", True, self.colorTxtAuto, SOKOBAN.WHITE)
+        self.posTxtPREV = ((SOKOBAN.WINDOW_WIDTH - self.txtPREV.get_width()) - 10, 60)
+        window.blit(self.txtPREV, self.posTxtPREV)
+
+        self.txtNEXT = self.font_menu.render("NEXT", True, self.colorTxtAuto, SOKOBAN.WHITE)
+        self.posTxtNEXT = ((SOKOBAN.WINDOW_WIDTH - self.txtNEXT.get_width()) - 10, 90)
+        window.blit(self.txtNEXT, self.posTxtNEXT)
