@@ -142,6 +142,7 @@ def isFailed(posBox):
     return False
 
 """Implement all approcahes"""
+TIME_LIMIT = 10
 
 def depthFirstSearch(gameState):
     """Implement depthFirstSearch approach"""
@@ -154,7 +155,12 @@ def depthFirstSearch(gameState):
     actions = [[0]] 
     temp = []
     # DFS here
+    start_time = time.time()
     while frontier:
+        running_time = time.time() - start_time
+        if running_time > TIME_LIMIT:
+            print("Time Limit Exceeded!")
+            return []
         node = frontier.pop()
         node_action = actions.pop()
         if isEndState(node[-1][-1]):
@@ -181,7 +187,12 @@ def breadthFirstSearch(gameState):
     exploredSet = set()
     temp = []
     ### Implement breadthFirstSearch here
+    start_time = time.time()
     while frontier:
+        running_time = time.time() - start_time
+        if running_time > TIME_LIMIT:
+            print("Time Limit Exceeded!")
+            return []
         node = frontier.popleft()
         node_action = actions.popleft()
         if isEndState(node[-1][-1]):
@@ -214,7 +225,12 @@ def uniformCostSearch(gameState):
     actions.push([0], 0)
     temp = []
     ### Implement uniform cost search here
+    start_time = time.time()
     while frontier:
+        running_time = time.time() - start_time
+        if running_time > TIME_LIMIT:
+            print("Time Limit Exceeded!")
+            return []
         node = frontier.pop()
         node_action = actions.pop()
         if isEndState(node[-1][-1]):
@@ -265,5 +281,5 @@ def get_move(layout, player_pos, method):
         raise ValueError('Invalid method.')
     time_end=time.time()
     print('Runtime of %s: %.2f second.' %(method, time_end-time_start))
-    print(result)
+    print('Num step: ', len(result))
     return result
