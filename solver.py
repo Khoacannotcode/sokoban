@@ -227,7 +227,7 @@ def breadthFirstSearch(gameState):
                     continue
                 # Add this state into the frontier
                 frontier.append(node + [(newPosPlayer, newPosBox)])
-                # Ass this action into the actions
+                # Add this action into the actions
                 actions.append(node_action + [action[-1]])
     # When while loop is done, return the answer
     return temp

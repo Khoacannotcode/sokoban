@@ -24,7 +24,6 @@ def move( threadName, delay, strategy):
             press('down')
         if step in ['U','u']:
             press('up')
-        # time.sleep(0.2)
 class Game:
     def __init__(self, window, algo):
         self.window = window
@@ -49,14 +48,14 @@ class Game:
     def load_level(self, prev=False, next=False):
         if next:
             self.index_level += 1
-            if (self.index_level == 17):
+            if (self.index_level == 19):
                 self.index_level = 1
             self.scores.save()
             self.load_level()
         elif prev:
             self.index_level -= 1
             if (self.index_level == 0):
-                self.index_level = 16
+                self.index_level = 18
             self.scores.save()
             self.load_level()
         else:
@@ -87,7 +86,7 @@ class Game:
                 self.player.move(event.key, self.level, self.player_interface)
                 if self.has_win():
                     self.index_level += 1
-                    if (self.index_level == 17):
+                    if (self.index_level == 19):
                         self.index_level = 1
                     self.scores.save()
                     self.load_level()
