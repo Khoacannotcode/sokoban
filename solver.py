@@ -265,6 +265,8 @@ def readCommand(argv):
     return args
 
 def get_move(layout, player_pos, method):
+    print("Activated auto play!")
+    print("Running...")
     time_start = time.time()
     global posWalls, posGoals
     # layout, method = readCommand(sys.argv[1:]).values()
@@ -280,6 +282,8 @@ def get_move(layout, player_pos, method):
     else:
         raise ValueError('Invalid method.')
     time_end=time.time()
-    print('Runtime of %s: %.2f second.' %(method, time_end-time_start))
-    print('Num step: ', len(result))
+    if result:
+        print('Runtime of %s: %.2f second.' %(method, time_end-time_start))
+        print('Num step: ', len(result))
+    print("================================")
     return result

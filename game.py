@@ -11,6 +11,9 @@ from pyautogui import press, typewrite, hotkey
 
 import _thread
 import time
+import os
+
+os.system('cls||clear')
 def move( threadName, delay, strategy):
     for step in strategy:
         if step in ['R','r']:
@@ -109,9 +112,9 @@ class Game:
         return nb_missing_target == 0
 
     def auto_move(self):
-        strategy = get_move(self.level.structure[:-1], self.level.position_player, 'dfs')
+        # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'dfs')
         # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'bfs')
-        # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'ucs')
+        strategy = get_move(self.level.structure[:-1], self.level.position_player, 'ucs')
         # with open("assets/sokobanSolver/Solverlevel_" + str(self.index_level) + ".txt", 'w+') as solver_file:
         #     for listitem in strategy:
         #         solver_file.write('%s, ' % listitem)
